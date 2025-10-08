@@ -76,15 +76,19 @@
 // // export default config;
 import 'jest-preset-angular/setup-jest';
 
-export default {
+module.exports = {
   preset: 'jest-preset-angular',
-  testEnvironment: 'jsdom',
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-      stringifyContentPathRegex: '\\.html$',
-    },
+  testEnvironment: 'jsdom', // Test compatible avec Angular
+  transform: {
+    '^.+\\.ts$': [
+      'ts-jest',
+      {
+        useESM: true, // Assure que ts-jest gère les modules ES
+      },
+    ],
+    '^.+\\.html$': 'ts-jest', // Transform les fichiers HTML également
   },
+  extensionsToTreatAsEsm: ['.ts'],
   moduleFileExtensions: ['ts', 'html', 'js', 'json'],
   coverageReporters: ['html', 'text-summary'],
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
