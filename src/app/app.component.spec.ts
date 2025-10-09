@@ -1,10 +1,15 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter, withRouterConfig } from '@angular/router';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [
+        // Fournir un Router minimal pour les tests
+        provideRouter([], withRouterConfig({})),
+      ],
     }).compileComponents();
   });
 
@@ -24,6 +29,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, app-ma-nounou');
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Hello, app-ma-nounou',
+    );
   });
 });
