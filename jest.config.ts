@@ -1,7 +1,14 @@
 import type { Config } from 'jest';
+import { pathsToModuleNameMapper } from 'ts-jest';
+const tsconfig = require('./tsconfig.json');
 
 const config: Config = {
-  moduleNameMapper: {},
+  moduleNameMapper: pathsToModuleNameMapper(
+    tsconfig.compilerOptions.paths || {},
+    {
+      prefix: '<rootDir>/',
+    },
+  ),
 };
 
 export default config;
