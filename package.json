@@ -34,21 +34,31 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "^20.0.0",
+    "@angular-devkit/build-angular": "^20.3.5",
     "@angular/build": "^20.2.1",
     "@angular/cli": "^20.2.1",
     "@angular/compiler-cli": "^20.2.3",
+    "@eslint/js": "^9.37.0",
+    "@eslint/json": "^0.13.2",
+    "@eslint/markdown": "^7.4.0",
     "@types/jest": "^30.0.0",
     "angular-eslint": "20.2.0",
-    "eslint": "^9.28.0",
+    "eslint": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jest": "^29.0.1",
+    "eslint-plugin-perfectionist": "^4.15.1",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.4.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
+    "jiti": "^2.6.1",
     "lint-staged": "^16.0.0",
     "ng-mocks": "^14.13.5",
     "ng-openapi-gen": "^0.53.0",
     "prettier": "^3.5.3",
     "prettier-plugin-organize-imports": "^4.1.0",
     "typescript": "~5.9.2",
-    "typescript-eslint": "^8.33.1"
+    "typescript-eslint": "^8.46.0"
   },
   "lint-staged": {
     "*.{html,js,ts,css,scss,json,yaml,yml}": "prettier --write"

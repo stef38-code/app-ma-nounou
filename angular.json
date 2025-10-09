@@ -50,12 +50,15 @@
                   "maximumError": "8kB"
                 }
               ],
+              "optimization": true,
+              "sourceMap": false,
               "outputHashing": "all"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "outputHashing": "none"
             }
           },
           "defaultConfiguration": "production"
