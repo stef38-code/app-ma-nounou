@@ -15,7 +15,8 @@
     "clean": "npx rimraf --glob **/node_modules **/dist **/.angular",
     "clean:install": "npx rimraf --glob **/node_modules **/dist **/.angular package-lock.json && npm cache clean --force && npm install",
     "prepare": "husky",
-    "eslint": " npx eslint . --ext .ts"
+    "eslint": " npx eslint . --ext .ts,.html,.json,.md",
+    "eslint:fix": " npx eslint . --ext .ts,.html,.json,.md --fix"
   },
   "private": true,
   "dependencies": {

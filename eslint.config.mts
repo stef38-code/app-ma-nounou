@@ -10,7 +10,8 @@ import eslintConfigPrettier from'eslint-config-prettier';
 // Définition de la configuration ESLint pour gérer différents fichiers et règles
 export default defineConfig([
   // Gestion des fichiers globalement ignorés (comme les dossiers générés automatiquement)
-  globalIgnores(['**/dist/**', '**/coverage/**/*', '**/node_modules/**/*','src/app/api/**/*','src/index.html']),
+  globalIgnores(['**/dist/**', '**/coverage/**/*',
+    '**/node_modules/**/*','src/app/api/**/*','src/index.html','package-lock.json']),
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
     plugins: {js: eslint}, // Les règles spécifiques à JavaScript
@@ -157,7 +158,7 @@ export default defineConfig([
   },
 
   // Configuration JSON (par exemple, fichiers de config Angular)
-  { files: ["**/*.jsonc"], plugins: { json }, language: "json/jsonc", extends: ["json/recommended"] },
+  { files: ["**/*.jsonc","**/*.json"], plugins: { json }, language: "json/jsonc", extends: ["json/recommended"] },
 
   // Configuration Markdown (y compris la documentation)
   { files: ["**/*.md"], plugins: { markdown }, language: "markdown/commonmark", extends: ["markdown/recommended"] },
