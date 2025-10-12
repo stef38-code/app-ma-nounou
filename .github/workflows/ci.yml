@@ -42,8 +42,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Créez un secret dans "Settings > Secrets and variables"
         with:
           args: >
-            -Dsonar.projectKey=stef38-code_app-ma-nounou
-            -Dsonar.organization=stephane
+            -Dsonar.projectKey=stef38-code_app-nounou
+            -Dsonar.organization=stef38-code
             -Dsonar.sources=src
             -Dsonar.tests=src
             -Dsonar.inclusions=**/*.ts
