@@ -40,6 +40,8 @@
     "@angular/build": "^20.2.1",
     "@angular/cli": "^20.2.1",
     "@angular/compiler-cli": "^20.2.3",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@eslint/js": "^9.37.0",
     "@eslint/json": "^0.13.2",
     "@eslint/markdown": "^7.4.0",
@@ -67,6 +69,9 @@
     "typescript-eslint": "^8.46.0"
   },
   "lint-staged": {
-    "*.{html,js,ts,css,scss,json,yaml,yml}": "prettier --write"
+    "*.{ts,html,scss}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
