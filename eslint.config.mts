@@ -9,7 +9,8 @@ import eslintConfigPrettier from'eslint-config-prettier';
 import importer from 'eslint-plugin-import';
 import unused_imports from 'eslint-plugin-unused-imports';
 import security from 'eslint-plugin-security';
-
+import sonarjs from'eslint-plugin-sonarjs';
+import eslint_plugin_import from 'eslint-plugin-import';
 // Définition de la configuration ESLint pour gérer différents fichiers et règles
 export default defineConfig([
   // Gestion des fichiers globalement ignorés (comme les dossiers générés automatiquement)
@@ -35,7 +36,7 @@ export default defineConfig([
     plugins: {
       "import": importer,
       'unused-imports': unused_imports,
-      'security': security,
+      'eslint_plugin_import':eslint_plugin_import
     },
     extends: [
       eslint.configs.recommended, // Règles ESLint de base
@@ -43,10 +44,18 @@ export default defineConfig([
       ...tseslint.configs.stylistic, // Règles spécifiques au style de code TypeScript
       ...angular.configs.tsRecommended, // Meilleures pratiques pour Angular TypeScript
       security.configs.recommended,
+      sonarjs.configs.recommended,
       eslintConfigPrettier, // Désactivation des conflits entre ESLint et Prettier pour un formatage propre
     ],
     processor: angular.processInlineTemplates, // Gère les templates inline dans les composants Angular
     rules: {
+      'eslint_plugin_import/order': [
+        'error',
+        {
+          groups: [['builtin', 'external'], 'internal', ['parent', 'sibling'], 'index'],
+          'newlines-between': 'always',
+        },
+      ],
       // Meilleures pratiques Angular - conventions de nommage pour les directives et composants
       '@angular-eslint/directive-selector': [
         'error',
