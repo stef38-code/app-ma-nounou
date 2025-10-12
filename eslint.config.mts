@@ -81,7 +81,41 @@ export default defineConfig([
       '@typescript-eslint/no-inferrable-types': 'warn',
       '@typescript-eslint/no-shadow': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn',
+      eqeqeq: 'error',
+      complexity: ['error', 20],
+      curly: 'error',
+      'guard-for-in': 'error',
+      'max-classes-per-file': ['error', 1],
+      'max-len': [
+        'warn',
+        {
+          code: 120,
+          comments: 160,
+        },
+      ],
+      'max-lines': ['error', 400], // my favorite rule to keep files small
+      'no-bitwise': 'error',
+      'no-console': 'off',
+      'no-new-wrappers': 'error',
+      'no-useless-concat': 'error',
+      'no-var': 'error',
+      'no-restricted-syntax': 'off',
+      'no-shadow': 'error',
+      'one-var': ['error', 'never'],
+      'prefer-arrow-callback': 'error',
+      'prefer-const': 'error',
+      'sort-imports': [
+        'error',
+        {
+          ignoreCase: true,
+          ignoreDeclarationSort: true,
+          allowSeparatedGroups: true,
+        },
+      ],
 
+      // Security
+      'no-eval': 'error',
+      'no-implied-eval': 'error',
     },
   },
   {
