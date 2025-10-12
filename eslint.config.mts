@@ -6,6 +6,9 @@ import markdown from "@eslint/markdown";
 import {defineConfig, globalIgnores} from "eslint/config";
 import angular from 'angular-eslint';
 import eslintConfigPrettier from'eslint-config-prettier';
+import importer from 'eslint-plugin-import';
+import unused_imports from 'eslint-plugin-unused-imports';
+import security from 'eslint-plugin-security';
 
 // Définition de la configuration ESLint pour gérer différents fichiers et règles
 export default defineConfig([
@@ -29,11 +32,17 @@ export default defineConfig([
     // Ignorer certains dossiers Angular spécifiques
     ignores: ['.angular/**', '.nx/**', 'coverage/**', 'dist/**'],
     files: ['**/*.ts'], // Fichiers TypeScript concernés
+    plugins: {
+      "import": importer,
+      'unused-imports': unused_imports,
+      'security': security,
+    },
     extends: [
       eslint.configs.recommended, // Règles ESLint de base
       ...tseslint.configs.recommended, // Bonne pratique TypeScript par TypeScript-ESLint
       ...tseslint.configs.stylistic, // Règles spécifiques au style de code TypeScript
       ...angular.configs.tsRecommended, // Meilleures pratiques pour Angular TypeScript
+      security.configs.recommended,
       eslintConfigPrettier, // Désactivation des conflits entre ESLint et Prettier pour un formatage propre
     ],
     processor: angular.processInlineTemplates, // Gère les templates inline dans les composants Angular
@@ -55,14 +64,18 @@ export default defineConfig([
           style: 'kebab-case', // Utiliser kebab-case pour les balises des composants
         },
       ],
-
+      'unused-imports/no-unused-imports': 'warn',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+      ],
+      'import/no-cycle': ['warn', { maxDepth: 1 }],
       // Bonnes pratiques générales Angular
       '@angular-eslint/no-empty-lifecycle-method': 'warn', // Signale les méthodes de cycle de vie vides inutiles
       '@angular-eslint/prefer-on-push-component-change-detection': 'warn', // Encourager la détection des changements OnPush pour les composants
       '@angular-eslint/prefer-output-readonly': 'warn', // Préférer les sorties avec la déclaration readonly
       '@angular-eslint/prefer-signals': 'warn', // Préférer l'utilisation des Observable Signals (si compatible)
       '@angular-eslint/prefer-standalone': 'warn', // Encourager les composants autonomes (non dépendants de modules)
-
       // Bonnes pratiques TypeScript
       '@typescript-eslint/array-type': ['warn'], // Forcer un style cohérent pour les types des tableaux
       '@typescript-eslint/consistent-indexed-object-style': 'off', // Désactivé pour définir des objets indexés
@@ -82,6 +95,8 @@ export default defineConfig([
           format: ['camelCase', 'UPPER_CASE', 'PascalCase'], // camelCase pour les variables, UPPER_CASE pour les constantes, PascalCase pour les enums
         },
       ],
+      '@typescript-eslint/no-unnecessary-type-arguments': 'warn', //Élimine les types redondants dans les définitions explicites.
+      '@typescript-eslint/prefer-optional-chain': 'warn', //Encourage l'utilisation de l'optional chaining (?.) pour simplifier l'accès conditionnel aux propriétés.
       '@typescript-eslint/no-empty-function': 'warn', // Avertissement si une fonction vide est déclarée
       '@typescript-eslint/no-empty-interface': 'error', // Interdire les interfaces vides (inutile ou erreur)
       '@typescript-eslint/no-explicit-any': 'warn', // Interdire l'usage excessif de `any`
