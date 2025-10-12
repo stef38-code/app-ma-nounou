@@ -1,0 +1,50 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore: # Ignorer certains fichiers si nécessaire
+      - '.github/**'
+      - 'README.md'
+
+jobs:
+  tests:
+    name: Run Tests and Code Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Vérifier le code source
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Étape 2 : Installer Node.js et les dépendances
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Remplacez par votre version Node.js
+          
+      - name: Install dependencies
+        run: npm install
+
+      # Étape 3 : Lancer les tests unitaires
+      - name: Run Unit Tests
+        run: npm run test:unit
+
+      # Étape 4 : Lancer les tests E2E
+      - name: Run End-to-End Tests
+        run: npm run test:e2e
+
+      # Étape 5 : SonarCloud Analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Créez un secret dans "Settings > Secrets and variables"
+        with:
+          args: >
+            -Dsonar.projectKey=stef38-code_app-ma-nounou
+            -Dsonar.organization=stephane
+            -Dsonar.sources=src
+            -Dsonar.tests=src
+            -Dsonar.inclusions=**/*.ts
+            -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts
