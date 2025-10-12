@@ -14,7 +14,8 @@
     "lint-staged": "lint-staged --allow-empty",
     "clean": "npx rimraf --glob **/node_modules **/dist **/.angular",
     "clean:install": "npx rimraf --glob **/node_modules **/dist **/.angular package-lock.json && npm cache clean --force && npm install",
-    "prepare": "husky"
+    "prepare": "husky",
+    "eslint": " npx eslint . --ext .ts"
   },
   "private": true,
   "dependencies": {
