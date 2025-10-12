@@ -43,7 +43,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=stef38-code_app-nounou
-            -Dsonar.organization=stef38-code
+            -Dsonar.organization=stephane
             -Dsonar.sources=src
             -Dsonar.tests=src
             -Dsonar.inclusions=**/*.ts
