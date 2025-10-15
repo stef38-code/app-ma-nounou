@@ -49,11 +49,11 @@ jobs:
 
       # Étape 7 : SonarCloud Analysis
       - name: SonarCloud Analysis
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarcloud-github-action@e3b481c5d50b1eeac5034f92d6cf9b62d3cf5e7d
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Créez un secret dans "Settings > Secrets and variables"
           # Pour le debug, sinon, retirez-le après avoir trouvé le problème
-          SONAR_SCANNER_DEBUG: true
+          SONAR_SCANNER_DEBUG: false
         with:
           args: >
             -Dsonar.projectKey=stef38-code_app-nounou
