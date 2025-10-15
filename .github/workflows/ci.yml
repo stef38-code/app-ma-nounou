@@ -37,7 +37,7 @@ jobs:
         
       # Étape 3 : Lancer les tests unitaires
       - name: Run Unit Tests
-        run: npm run test:unit
+        run: npm run test:ci
 
       # Étape 4 : Lancer les tests E2E
       #- name: Run End-to-End Tests
