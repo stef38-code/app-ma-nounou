@@ -19,7 +19,7 @@
     "eslint:fix": " npx eslint . --ext .ts,.html,.json,.md --fix",
     "check:deps": "npm-check --skip-unused --ignore-dev",
     "check:circular": "madge --circular ./src",
-    "e2e": "ng e2e",
+    "test:e2e": "ng e2e",
     "e2e:ui": "ng e2e --ui",
     "e2e:record": "node e2e.record.js"
   },

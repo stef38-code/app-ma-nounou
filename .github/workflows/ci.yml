@@ -21,30 +21,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Étape 2 : Lancer installation Node.js et les dépendances
-      - name: Install Node.js
+      # Étape 2 : Installer Node.js et les dépendances
+      - name: Installer Node.js et les dépendances
         uses: actions/setup-node@v3
         with:
           node-version: '20' # Remplacez par votre version Node.js
 
-      # Installer Node.js et les dépendances
-      - name: Lancer installation
+      # Installer les dépendances npm
+      - name: Installer les dépendances npm
         run: npm install
 
-      # NOUVELLE ÉTAPE : Lancer le build (si pertinent)
+      # Étape 3 : Installation des navigateurs Playwright
+      - name: Installation des navigateurs Playwright
+        run: npx playwright install --with-deps
+
+      # Étape 4 : Lancer le build
       - name: Lancer le build
         run: npm run build
 
-      # Étape 3 : Lancer les tests unitaires
-      - name: Run Unit Tests
+      # Étape 5 : Lancer les tests unitaires
+      - name: Lancer les tests unitaires
         run: npm run lint:ci && npm run test:ci
 
-      # Étape 4 : Lancer les tests E2E
-      #- name: Run End-to-End Tests
-      #  run: npm run test:e2e
+      # Étape 6 : Lancer les tests E2E avec Playwright
+      - name: Lancer les tests E2E avec Playwright
+        run: npm run test:e2e
 
-      # Étape 5 : SonarCloud Analysis
-      - name: Lancer SonarCloud analyse
+      # Étape 7 : SonarCloud Analysis
+      - name: SonarCloud Analysis
         uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Créez un secret dans "Settings > Secrets and variables"
