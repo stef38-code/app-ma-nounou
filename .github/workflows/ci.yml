@@ -40,8 +40,8 @@ jobs:
         run: npm run lint:ci && npm run test:ci
 
       # Étape 4 : Lancer les tests E2E
-      #- name: Run End-to-End Tests
-      #  run: npm run test:e2e
+      - name: Lancer les tests e2e
+        run: npm run test:e2e
 
       # Étape 5 : SonarCloud Analysis
       - name: Lancer SonarCloud analyse
