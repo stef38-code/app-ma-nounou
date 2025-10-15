@@ -15,29 +15,29 @@ jobs:
     permissions:
       contents: read # Lecture des fichiers
       pull-requests: write # Permet de commenter le PR avec les résultats de SonarCloud
-      
+
     steps:
       # Étape 1 : Vérifier le code source
       - name: Checkout code
         uses: actions/checkout@v3
-    
+
       # Étape 2 : Lancer installation Node.js et les dépendances
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20' # Remplacez par votre version Node.js
-      
+
       # Installer Node.js et les dépendances
       - name: Lancer installation
         run: npm install
 
       # NOUVELLE ÉTAPE : Lancer le build (si pertinent)
       - name: Lancer le build
-        run: npm run build  
-        
+        run: npm run build
+
       # Étape 3 : Lancer les tests unitaires
       - name: Run Unit Tests
-        run: npm run test:ci
+        run: npm run lint:ci && npm run test:ci
 
       # Étape 4 : Lancer les tests E2E
       #- name: Run End-to-End Tests
@@ -49,7 +49,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Créez un secret dans "Settings > Secrets and variables"
           # Pour le debug, sinon, retirez-le après avoir trouvé le problème
-          SONAR_SCANNER_DEBUG: true 
+          SONAR_SCANNER_DEBUG: true
         with:
           args: >
             -Dsonar.projectKey=stef38-code_app-nounou

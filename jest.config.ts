@@ -12,6 +12,9 @@ const config: Config = {
       prefix: '<rootDir>/',
     },
   ),
+  collectCoverage: true,
+  coverageDirectory: 'coverage',
+  coverageReporters: ['lcov', 'text'],
 };
 
 export default config;
