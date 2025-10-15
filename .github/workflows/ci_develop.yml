@@ -1,0 +1,44 @@
+name: CI Pipeline for Develop
+
+on:
+  pull_request:
+    branches:
+      - develop
+    paths-ignore: # Ignorer certains fichiers si nécessaire
+      - '.github/**'
+      - 'README.md'
+
+jobs:
+  tests:
+    name: Run Tests for Develop
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Vérifier le code source
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Étape 2 : Installer Node.js et les dépendances
+      - name: Installer Node.js et les dépendances
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # Installer les dépendances npm
+      - name: Installer les dépendances npm
+        run: npm install
+
+      # Étape 3 : Installation des navigateurs Playwright
+      - name: Installation des navigateurs Playwright
+        run: npx playwright install --with-deps
+
+      # Étape 4 : Lancer les tests (unitaires et e2e)
+      - name: Lancer les tests unitaires
+        run: npm run lint:ci && npm run test:ci
+
+      - name: Lancer les tests E2E
+        run: npm run test:e2e
+
+      # Étape optionnelle : Build pour l'environnement TEST/STAGING
+      - name: Build for Test
+        run: npm run build:staging
